@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product</title>
+    <link rel="stylesheet" href="product.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.2/ScrollMagic.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.2/plugins/animation.gsap.js"></script>
+</head>
+
+<body>
+    <div>
+        <div class="product-images">
+            <div class="image-one">
+                <picture>
+                    <source media="(max-width:767px)" srcset="img/p03.jpg">
+                    <img src="img/p03.jpg" class="img-responsive">
+                </picture>
+                <div class="shop-btn">Shop Now</div>
+            </div>
+            <div class="image-two">
+                <picture>
+                    <source media="(max-width:767px)" srcset="img/p02.png">
+                    <img src="img/p02.png" class="img-responsive">
+                </picture>
+                <div class="shop-btn">Shop Now</div>
+            </div>
+            <div class="image-three">
+                <picture>
+                    <source media="(max-width:767px)" srcset="img/p01.jpg">
+                    <img src="img/p01.jpg" class="img-responsive">
+                </picture>
+                <div class="shop-btn">Shop Now</div>
+            </div>
+
+        </div>
+    </div>
+
+    <div style="height: 100vh;"></div>
+
+    <script>
+
+        window.onLoad = function () {
+            window.scrollTo(0, 1);
+        }
+
+        function checkPosition() {
+            if (window.matchMedia('(max-width: 991px)').matches) {
+                var controller = new ScrollMagic.Controller();
+                var imageAnimation = new TimelineMax();
+                var winH = window.innerHeight;
+                imageAnimation
+                    .add(
+                        TweenMax.fromTo(".image-one", 1, { transform: 'translate3d(0,0vh,0)' }, { transform: 'translate3d(0,-100vh,0)' }),
+                        "first"
+                    )
+
+                imageAnimation
+                    .add(
+                        TweenMax.fromTo(".image-two", 1, { transform: 'translate3d(0,0vh,0)' }, { transform: 'translate3d(0,-100vh,0)' }),
+                        "second"
+                    )
+
+                imageAnimation
+                    .add(
+                        TweenMax.fromTo(".image-three", 1, { transform: 'translate3d(0,0vh,0)' }, { transform: 'translate3d(0,-100vh,0)' }),
+                        "third"
+                    )
+
+                var firstImage = new ScrollMagic.Scene({
+                    triggerElement: ".product-images",
+                    offset: 0.5 * winH,
+                    duration: winH * 3,
+                })
+                    .setPin(".product-images", {
+                        pushFollowers: true
+                    })
+                    .setTween(imageAnimation)
+                    .addTo(controller);
+            }
+        }
+        checkPosition();
+
+
+    </script>
+</body>
+
+</html>
